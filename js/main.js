@@ -1,35 +1,21 @@
-const prevBtn = document.querySelector('.btn-prev')
-const nextBtn = document.querySelector('.btn-next')
-const slides = document.querySelectorAll('.slide')
+const refreshBtn = document.querySelector("#refresh");
+const toggleBtn = document.querySelector("#toggle");
+const body = document.querySelector("body");
+const theme = localStorage.getItem("theme");
 
-let currentSlide = 0
-let latestSlide = slides.length - 1
+if (theme === "dark") {
+    body.classList.add("dark");
+}
 
-
-nextBtn.addEventListener('click', () => {
-    if(currentSlide === latestSlide){
-        currentSlide = 0
+toggleBtn.addEventListener("click", function () {
+    body.classList.toggle("dark");
+    if (theme === "dark") {
+        localStorage.setItem("theme", "light");
     } else {
-        currentSlide += 1
+        localStorage.setItem("theme", "dark");
     }
-
-    //100 % slide move
-    slides.forEach((slide, idx) =>{
-        slide.style.transform = 'translateX(' + (100 * (idx - currentSlide)) + '%)'
-    })
 })
 
-
-prevBtn.addEventListener('click', () => {
-    if (currentSlide === 0){
-        currentSlide = latestSlide
-    } else {
-        currentSlide -= 1
-    }
-
-    //-100 % slide move
-    slides.forEach((slide, idx) => {
-        slide.style.transform = 'translateX(' + (100 * (idx - currentSlide)) + '%)'
-    })
+refreshBtn.addEventListener("click", function () {
+    window.history.go(0);
 })
-
