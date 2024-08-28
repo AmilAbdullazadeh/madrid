@@ -1,21 +1,9 @@
-const refreshBtn = document.querySelector("#refresh");
-const toggleBtn = document.querySelector("#toggle");
-const body = document.querySelector("body");
-const theme = localStorage.getItem("theme");
+let menuBar = document.getElementById('menu-bar');
+let nav = document.getElementById('nav');
+let menuBg = document.getElementById('menu-bg');
 
-if (theme === "dark") {
-    body.classList.add("dark");
+function toggleMenu() {
+    menuBar.classList.toggle('change');
+    nav.classList.toggle('change');
+    menuBg.classList.toggle('change-bg');
 }
-
-toggleBtn.addEventListener("click", function () {
-    body.classList.toggle("dark");
-    if (theme === "dark") {
-        localStorage.setItem("theme", "light");
-    } else {
-        localStorage.setItem("theme", "dark");
-    }
-})
-
-refreshBtn.addEventListener("click", function () {
-    window.history.go(0);
-})
