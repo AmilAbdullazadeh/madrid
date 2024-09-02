@@ -1,38 +1,81 @@
-// Countdown Timer
-// Task: Create a countdown timer that counts down from a specified number of seconds.
-// When the countdown reaches zero, show a message like "Time's up!".
+const musicContainer = document.getElementById("music-container");
+const playBtn = document.getElementById("play");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const audio = document.getElementById("audio");
+const progress = document.getElementById("progress");
+const title = document.getElementById("title");
+const cover = document.getElementById("cover");
+const durTime = document.querySelector("#durTime");
+const currTime = document.querySelector("#currTime");
 
-const startBtn = document.querySelector("#start-btn");
-const timerDisplay = document.querySelector("#timer-display");
+// Song titles
 
-const secondsFromClient = prompt("Enter the number of seconds for the countdown timer: ");
-
-let countdown = null;
-
-function startTimer() {
-    clearInterval(countdown);
-    let timeLeft = parseInt(secondsFromClient)
+const songs = [
+    "JuiceWRLD-Ft-BennyBlanco-RealShit",
+    "LilBaby-LilDurk-Ft-Rodwave-RichOffPain",
+    "PoloG-I-Know"
+];
 
 
-    function updateTimer() {
-        timerDisplay.textContent = convertSecondsToMinutes(timeLeft);
+function loadSong(song) {
+    title.innerText = song
+    audio.src = `./musics/${song}.mp3`
+    cover.src = `./assets/${song}.jpg`
+}
 
-        if (timeLeft > 0) {
-            timeLeft--;
-        } else {
-            clearInterval(countdown);
-            timerDisplay.textContent = "Time's up!";
-        }
+let index = 0
+
+loadSong(songs[index])
+
+function play() {
+    musicContainer.classList.add('play')
+    playBtn.querySelector('i.fas').classList.add("fa-pause")
+    playBtn.querySelector('i.fas').classList.remove("fa-play")
+}
+
+function pause() {
+    musicContainer.classList.remove('play')
+    playBtn.querySelector('i.fas').classList.remove("fa-pause")
+    playBtn.querySelector('i.fas').classList.add("fa-play")
+}
+
+playBtn.addEventListener('click', () => {
+    let isPlaying = musicContainer.classList.contains('play')
+    isPlaying ? pause() : play()
+})
+
+function prevSong() {
+    index --
+
+    if (index < 0) {
+        index = songs.length - 1
     }
 
-    countdown = setInterval(updateTimer, 1000)
-    updateTimer()
+    loadSong(songs[index])
+
+    play()
 }
 
-function convertSecondsToMinutes(secondsTimeLeft) {
-    let minutes = Math.floor(secondsTimeLeft / 60);
-    let seconds = secondsTimeLeft % 60;
-    return `Time left: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+function nextSong() {
+    index ++
+
+    if (index > songs.length - 1) {
+        index = 0
+    }
+
+    loadSong(songs[index])
+
+    play()
 }
 
-startBtn.addEventListener("click", startTimer)
+prevBtn.addEventListener('click', prevSong)
+nextBtn.addEventListener('click', nextSong)
+
+function updateProgress(e) {
+    const { duration, currentTime } = e.srcElement
+    let progressPercent = (currentTime / duration) * 100
+    progress.style.width = `${progressPercent}%`
+}
+
+audio.addEventListener('timeupdate', updateProgress)
