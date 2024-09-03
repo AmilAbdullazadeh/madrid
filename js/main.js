@@ -26,7 +26,7 @@ const metadata = document.getElementById("meta-data");
 
 //   ✅  Mute/Unmute: The toggleMute function toggles between mute and unmute, changing the icon accordingly.
 
-//     Display Song Metadata: The metadata element shows additional information about the song, such as artist name and album.
+//   ✅  Display Song Metadata: The metadata element shows additional information about the song, such as artist name and album.
 
 //   ✅  Keyboard Controls: Keyboard controls for play/pause (Space), next (ArrowRight), and previous (ArrowLeft) have been implemented.
 
