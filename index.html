@@ -17,8 +17,12 @@
 <div class="music-container" id="music-container">
     <div class="music-info">
         <h4 id="title"></h4>
+        <p id="meta-data" ></p>
         <div class="progress-container" id="progress-container">
             <div class="progress" id="progress"></div>
+        </div>
+        <div>
+            <span id="currTime">0:00</span> / <span id="durTime">0:00</span>
         </div>
     </div>
     <audio src="./musics/Juice%20WRLD%20Ft%20Benny%20Blanco%20-%20Real%20Shit.mp3" id="audio"></audio>
@@ -35,7 +39,14 @@
         <button id="next" class="action-btn">
             <i class="fas fa-forward"></i>
         </button>
+        <button id="shuffle" class="action-btn">
+            <i class="fas fa-random"></i>
+        </button>
+        <button id="mute" class="action-btn">
+            <i class="fas fa-volume-mute"></i>
+        </button>
     </div>
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
 </div>
 
 <script src="./js/main.js"></script>
