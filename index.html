@@ -13,48 +13,10 @@
 </head>
 <body>
 
-<form
-        id="form"
-        name="myForm"
->
-    <table cellspacing="2" cellpadding="2" border="1">
-        <tr>
-            <td align="right">Fullname</td>
-            <td><input type="text" name="fullname"  id="fullname"/></td>
-        </tr>
-
-        <tr>
-            <td align="right">EMail</td>
-            <td>
-                <input class="invalid" required type="text" name="email"  id="email"/>
-                <small class="error" >Please enter a valid email</small>
-            </td>
-        </tr>
-
-        <tr>
-            <td align="right">Zip Code</td>
-            <td><input type="text" name="zip"  id="zip"/></td>
-        </tr>
-
-        <tr>
-            <td align="right">Country</td>
-            <td>
-                <select name="country" id="country">
-                    <option value="-1" selected>[choose yours]</option>
-                    <option value="usa">USA</option>
-                    <option value="uk">UK</option>
-                    <option value="india">INDIA</option>
-                </select>
-            </td>
-        </tr>
-
-        <tr>
-            <td align="right"></td>
-            <td><input type="submit" id="submit" value="Submit" /></td>
-        </tr>
-    </table>
-</form>
-
+<h1>Password Strength Test</h1>
+<div class="strength-meter" id="strength-meter"></div>
+<input class="password-input" id="password-input" placeholder="password" value="" type="text" autofocus aria-laballedby="password">
+<div id="reasons" class="reasons"></div>
 
 <script src="./js/main.js"></script>
 </body>
