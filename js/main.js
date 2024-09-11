@@ -1,29 +1,34 @@
+const recipeList = document.querySelector('#recipe-list');
+
 const config = {
-    name: 'NASA API',
-    baseUrl: 'https://api.nasa.gov/planetary/apod?api_key=',
-    apiKey: '84pDsFJmvwh47VlR9zAdJhQinXKT2jgvwmcE6Tr'
+    apiKey: '275d58779ccf4e22af03e792e8819fff',
+    baseUrl: 'https://api.spoonacular.com/recipes/random?number=50&apiKey='
 }
 
-const title = document.querySelector("#title")
-const date = document.querySelector("#date")
-const picture = document.querySelector("#picture");
-const explanation = document.querySelector('#explanation')
+const fetchRecipes = async () => {
+    const response = await fetch(`${config.baseUrl}${config.apiKey}`);
+    const data = await response.json();
 
-async function getNASAData() {
-    try {
-        const response = await fetch(`${config.baseUrl}${config.apiKey}`)
-        const data = await response.json()
-        displayNASAData(data)
-    } catch (error) {
-        alert('An error occurred while fetching data from the NASA API')
-    }
+    displayRecipes(data.recipes);
 }
 
-getNASAData()
+fetchRecipes()
 
-function displayNASAData(data) {
-    title.textContent = data.title
-    date.textContent = data.date
-    picture.src = data.url
-    explanation.textContent = data.explanation
+const displayRecipes = (recipes) => {
+    recipes.forEach((recipe) => {
+        const recipeItem = document.createElement('li');
+        recipeItem.classList.add('recipe-item');
+        recipeItem.innerHTML = `
+            <img
+                src="${recipe.image}"
+                alt="${recipe.title}"
+            />
+            <h2>${recipe.title}</h2>
+            <p>
+                <strong>Ingredients:</strong> ${recipe.extendedIngredients.map((ingredient) => ingredient.originalName).join(', ')}
+            </p>
+            <a href="" target="_blank">View Recipe</a>
+        `;
+        recipeList.appendChild(recipeItem);
+    });
 }
